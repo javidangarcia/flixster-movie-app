@@ -1,0 +1,20 @@
+body {
+    margin: 0px;
+    background-color: #202020;
+    color: white;
+    font-family: Arial, sans-serif;
+}
+
+.heading {
+    display: flex;
+    justify-content: center;
+}
+
+h2 {
+    font-size: 20px;
+    padding-left: 10px;
+}
+
+p {
+    padding-left: 10px;
+}
