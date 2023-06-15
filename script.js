@@ -1,16 +1,20 @@
 var movies = document.getElementById("movies-grid");
+var moviesBtn = document.getElementById("load-more-movies-btn");
 
 const apiKey = "43c1cf15af2eab2d2eb205ea044360be";
-const url = `https://api.themoviedb.org/3/movie/now_playing?api_key=${apiKey}`
 
 // movie poster image link information
 const base_url = "http://image.tmdb.org/t/p/";
 const poster_size = "w300";
 
+var currentPage = 1;
+
 document.addEventListener('DOMContentLoaded', fetchData);
+moviesBtn.addEventListener('click', fetchData);
 
 async function fetchData() {
     try {
+        const url = `https://api.themoviedb.org/3/movie/now_playing?api_key=${apiKey}&page=${currentPage}`;
         const response = await fetch(url);
         const data = await response.json();
         const results = data["results"];
@@ -43,10 +47,13 @@ async function fetchData() {
           movieDiv.appendChild(titleParagraph);
 
           movies.appendChild(movieDiv);
+
+        
         });
+
+        currentPage += 1;
 
     } catch (error) {
         console.log(error);
     }
 };
-
