@@ -1,4 +1,4 @@
-var movies = document.getElementById("movies-grid");
+var moviesGrid = document.getElementById("movies-grid");
 var moviesBtn = document.getElementById("load-more-movies-btn");
 var searchMovies = document.getElementById("search-movies")
 var submitBtn = document.getElementById("submitBtn");
@@ -44,7 +44,7 @@ function displayMovies(results) {
         movieDiv.appendChild(votesParagraph);
         movieDiv.appendChild(titleParagraph);
 
-        movies.appendChild(movieDiv);
+        moviesGrid.appendChild(movieDiv);
 
     });
         
@@ -70,12 +70,17 @@ async function displayNowPlaying() {
 
 async function displaySearchMovie() {
     try {
+        // resets moviesGrid div
+        while (moviesGrid.firstChild) {
+            moviesGrid.removeChild(moviesGrid.firstChild);
+        }
+
         const searchQuery = searchInput.value;
         const url = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${searchQuery}`
         const response = await fetch(url);
         const data = await response.json();
         const results = data["results"];
-
+        
         displayMovies(results);
 
     } catch (error) {
