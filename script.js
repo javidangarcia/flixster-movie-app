@@ -1,9 +1,10 @@
-var moviesGrid = document.getElementById("movies-grid");
-var moviesBtn = document.getElementById("load-more-movies-btn");
-var submitBtn = document.getElementById("submit-btn");
-var searchInput = document.getElementById("search-input");
-var closeBtn = document.getElementById("close-search-btn")
-var nowPlaying = document.getElementById("now-playing")
+const moviesGrid = document.getElementById("movies-grid");
+const moviesBtn = document.getElementById("load-more-movies-btn");
+const submitBtn = document.getElementById("submit-btn");
+const searchInput = document.getElementById("search-input");
+const closeSearchBtn = document.getElementById("close-search-btn")
+const nowPlaying = document.getElementById("now-playing")
+
 
 const apiKey = "43c1cf15af2eab2d2eb205ea044360be";
 const baseUrl = "http://image.tmdb.org/t/p/";
@@ -15,7 +16,8 @@ submitBtn.addEventListener("click", function (event) {
     event.preventDefault();
     displaySearchMovie();
 });
-closeBtn.addEventListener("click", closeSearch);
+closeSearchBtn.addEventListener("click", closeSearch);
+
 
 function displayMovies(results) {
 
@@ -62,7 +64,7 @@ async function displayNowPlaying() {
         const results = data["results"];
         
         displayMovies(results);
-        closeBtn.className = "hidden";
+        closeSearchBtn.className = "hidden";
 
         currentPage += 1;
 
@@ -85,7 +87,7 @@ async function displaySearchMovie() {
         const results = data["results"];
         
         displayMovies(results);
-        closeBtn.className = "close-btn";
+        closeSearchBtn.className = "close-btn";
         moviesBtn.className = "hidden";
         nowPlaying.className = "hidden";
 
@@ -100,4 +102,48 @@ function closeSearch() {
     }
 
     displayNowPlaying();
+}
+
+// Movie Popup Feature
+
+moviesGrid.addEventListener("click", (event) => {
+    if (event.target.parentNode.classList.contains("movie-card")) {
+        const movieCard = event.target.parentNode;
+        const movieTitle = movieCard.querySelector(".movie-title").textContent;
+
+        const popupWindow = document.createElement("div");
+        popupWindow.className = "popup";
+        popupWindow.id = "popup-window";
+
+        const popupClose = document.createElement("div");
+        popupClose.className = "popup-close";
+
+        const closeBtn = document.createElement("button")
+        closeBtn.className = "close-btn"
+        closeBtn.id = "close-popup-btn";
+        closeBtn.textContent = "Close";
+
+        popupClose.appendChild(closeBtn);
+        popupWindow.appendChild(popupClose);
+
+        const popupContent = document.createElement("div");
+        popupContent.className = "popup-content";
+
+        const popupText = document.createElement("p")
+        popupText.className = "popup-text";
+        popupText.textContent = movieTitle;
+
+        popupContent.appendChild(popupText);
+        popupWindow.appendChild(popupContent);
+
+        document.body.appendChild(popupWindow);
+
+        closeBtn.addEventListener("click", closePopup);
+    }
+
+});
+
+function closePopup() {
+    const popupWindow = document.getElementById("popup-window");
+    document.body.removeChild(popupWindow);
 }
