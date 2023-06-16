@@ -1,19 +1,20 @@
 var moviesGrid = document.getElementById("movies-grid");
 var moviesBtn = document.getElementById("load-more-movies-btn");
-var searchMovies = document.getElementById("search-movies")
 var submitBtn = document.getElementById("submitBtn");
 var searchInput = document.getElementById("search-input");
+var closeBtn = document.getElementById("close-search-btn")
 
 const apiKey = "43c1cf15af2eab2d2eb205ea044360be";
 const baseUrl = "http://image.tmdb.org/t/p/";
 const posterSize = "w300";
 
-document.addEventListener('DOMContentLoaded', displayNowPlaying);
-moviesBtn.addEventListener('click', displayNowPlaying);
+document.addEventListener("DOMContentLoaded", displayNowPlaying);
+moviesBtn.addEventListener("click", displayNowPlaying);
 submitBtn.addEventListener("click", function (event) {
     event.preventDefault();
     displaySearchMovie();
 });
+closeBtn.addEventListener("click", closeSearch);
 
 function displayMovies(results) {
 
@@ -82,8 +83,17 @@ async function displaySearchMovie() {
         const results = data["results"];
         
         displayMovies(results);
+        closeBtn.classList.remove("hidden");
 
     } catch (error) {
         console.log(error);
     }
+}
+
+function closeSearch() {
+    while (moviesGrid.firstChild) {
+        moviesGrid.removeChild(moviesGrid.firstChild);
+    }
+
+    displayNowPlaying();
 }
