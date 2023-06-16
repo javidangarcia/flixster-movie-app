@@ -1,12 +1,13 @@
 var moviesGrid = document.getElementById("movies-grid");
 var moviesBtn = document.getElementById("load-more-movies-btn");
-var submitBtn = document.getElementById("submitBtn");
+var submitBtn = document.getElementById("submit-btn");
 var searchInput = document.getElementById("search-input");
 var closeBtn = document.getElementById("close-search-btn")
+var nowPlaying = document.getElementById("now-playing")
 
 const apiKey = "43c1cf15af2eab2d2eb205ea044360be";
 const baseUrl = "http://image.tmdb.org/t/p/";
-const posterSize = "w300";
+const posterSize = "w1280";
 
 document.addEventListener("DOMContentLoaded", displayNowPlaying);
 moviesBtn.addEventListener("click", displayNowPlaying);
@@ -61,6 +62,7 @@ async function displayNowPlaying() {
         const results = data["results"];
         
         displayMovies(results);
+        closeBtn.className = "hidden";
 
         currentPage += 1;
 
@@ -83,7 +85,9 @@ async function displaySearchMovie() {
         const results = data["results"];
         
         displayMovies(results);
-        closeBtn.classList.remove("hidden");
+        closeBtn.className = "close-btn";
+        moviesBtn.className = "hidden";
+        nowPlaying.className = "hidden";
 
     } catch (error) {
         console.log(error);
