@@ -46,13 +46,28 @@ h2 {
     width: calc(25% - 20px);
 }
 
-.movie-card p {
-    margin: 5px;
+.votes-container {
+    display: flex;
+    align-items: center;
+    margin-top: 5px;
+}
+
+.star-image {
+    height: 20px;
+    width: 20px;
+    margin-right: 8px;
+}
+
+.movie-votes {
     margin-left: 0px;
+    margin-top: 3px;
+    margin-bottom: 0px;
 }
 
 .movie-title {
     font-weight: bold;
+    margin: 5px;
+    margin-left: 0px;
 }
 
 .load-more-movies {
@@ -141,11 +156,36 @@ h2 {
 }
 
 .popup-content {
+    height: 80%;
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
 }
 
-.popup-text {
+.popup-title {
+    color: black;
+    font-size: 30px;
+    margin: 0px;
+    font-weight: bold;
+}
+
+.popup-info {
     color: black;
     font-size: 20px;
+    margin: 0px;
+}
+
+.popup-desc {
+    color: black;
+    font-size: 20px;
+    margin: 0px;
+    width: 50%;
+    margin-top: 20px;
+    text-align: center;
+}
+
+.star-image-popup {
+    height: 20px;
+    width: 20px;
 }

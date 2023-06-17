@@ -24,28 +24,41 @@ function displayMovies(results) {
     results.forEach((movie) => {
 
         const title = movie["title"];
-        const votes = movie["vote_average"];
+        const votes = movie["vote_average"].toFixed(1);
         const posterPath = movie["poster_path"];
 
         // Creating a div for each movie and adding a class for styling
         const movieDiv = document.createElement("div");
         movieDiv.classList.add("movie-card")
+        movieDiv.id = movie["id"];
           
         // Creating an img element for each movie poster
         const img = document.createElement("img");
         img.src = baseUrl + posterSize + '/' + posterPath;
         img.classList.add("movie-poster");
-      
-        // Creating p tags that contain votes and title information
+
+        // Creating votes div that contains star image and vote number
+        const votesContainer = document.createElement("div");
+        votesContainer.classList.add("votes-container");
+
+        const starImg = document.createElement("img");
+        starImg.src = "images/star.png";
+        starImg.classList.add("star-image");
+
         const votesParagraph = document.createElement("p");
-        votesParagraph.classList.add("movie-votes")
+        votesParagraph.classList.add("movie-votes");
         votesParagraph.textContent = votes;
+
+        votesContainer.appendChild(starImg);
+        votesContainer.appendChild(votesParagraph);
+
+        // Creating title name for movie
         const titleParagraph = document.createElement("p");
         titleParagraph.classList.add("movie-title")
         titleParagraph.textContent = title
 
         movieDiv.appendChild(img);
-        movieDiv.appendChild(votesParagraph);
+        movieDiv.appendChild(votesContainer);
         movieDiv.appendChild(titleParagraph);
 
         moviesGrid.appendChild(movieDiv);
@@ -104,46 +117,59 @@ function closeSearch() {
     displayNowPlaying();
 }
 
+
+
 // Movie Popup Feature
 
-moviesGrid.addEventListener("click", (event) => {
+moviesGrid.addEventListener("click", async (event) => {
     if (event.target.parentNode.classList.contains("movie-card")) {
         const movieCard = event.target.parentNode;
         const movieTitle = movieCard.querySelector(".movie-title").textContent;
+        const movieVotes = movieCard.querySelector(".movie-votes").textContent;
+        const movieID = movieCard.getAttribute("id");
+
+        const results = await movieInfo(movieID);
+        console.log(results);
+        const runtime = results["runtime"];
+        const releaseDate = results["release_date"];
+        const genre = results["genres"][0]["name"];
+        const overview = results["overview"];
 
         const popupWindow = document.createElement("div");
         popupWindow.className = "popup";
         popupWindow.id = "popup-window";
-
-        const popupClose = document.createElement("div");
-        popupClose.className = "popup-close";
-
-        const closeBtn = document.createElement("button")
-        closeBtn.className = "close-btn"
-        closeBtn.id = "close-popup-btn";
-        closeBtn.textContent = "Close";
-
-        popupClose.appendChild(closeBtn);
-        popupWindow.appendChild(popupClose);
-
-        const popupContent = document.createElement("div");
-        popupContent.className = "popup-content";
-
-        const popupText = document.createElement("p")
-        popupText.className = "popup-text";
-        popupText.textContent = movieTitle;
-
-        popupContent.appendChild(popupText);
-        popupWindow.appendChild(popupContent);
+        popupWindow.innerHTML = `
+            <div class="popup-close">
+                <button class="close-btn" id="close-popup-btn">Close</button>
+            </div>
+            <div class="popup-content">
+                <p class="popup-title">${movieTitle}</p>
+                <p class="popup-info">${runtime} min | ${releaseDate} | ${genre} | <img class="star-image-popup" src="images/star.png"> ${movieVotes}</p>
+                <p class="popup-desc">${overview}</p>
+            </div>
+        `;
 
         document.body.appendChild(popupWindow);
+        document.body.style.overflow = "hidden";
 
-        closeBtn.addEventListener("click", closePopup);
+        const closeBtn = document.getElementById("close-popup-btn");
+        closeBtn.addEventListener("click", () => {
+            document.body.removeChild(popupWindow);
+            document.body.style.overflow = "auto";
+        });
     }
 
 });
 
-function closePopup() {
-    const popupWindow = document.getElementById("popup-window");
-    document.body.removeChild(popupWindow);
+async function movieInfo(movieID) {
+    try {
+        const url = `https://api.themoviedb.org/3/movie/${movieID}?api_key=${apiKey}`
+        const response = await fetch(url);
+        const results = await response.json();
+        
+        return results;
+
+    } catch (error) {
+        console.log(error);
+    }
 }

@@ -2,7 +2,7 @@
 
 Submitted by: **Javier Garcia**
 
-Estimated time spent: **8** hours spent in total
+Estimated time spent: **15** hours spent in total
 
 Deployed Application (optional): [Flixster Deployed Site](https://javidangarcia.github.io/)
 
@@ -33,8 +33,8 @@ Deployed Application (optional): [Flixster Deployed Site](https://javidangarcia.
 #### Stretch Features
 
 - [x] Deploy website using GitHub Pages.
-- [ ] Allow user to view more details about a movie within a popup.
-- [ ] Improve the user experience through CSS & animation.
+- [x] Allow user to view more details about a movie within a popup.
+- [x] Improve the user experience through CSS & animation.
 - [ ] Allow movie video trailers to be played using [embedded YouTube](https://support.google.com/youtube/answer/171780?hl=en)
 - [ ] Implement anything else that you can get done to improve the app functionality!
 
