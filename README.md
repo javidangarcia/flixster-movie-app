@@ -40,28 +40,27 @@ Deployed Application (optional): [Flixster Deployed Site](https://javidangarcia.
 
 ### Walkthrough Video
 
-`TODO://` Add the embedded URL code to your animated app walkthrough below, `ADD_EMBEDDED_CODE_HERE`. Make sure the video or gif actually renders and animates when viewing this README. (🚫 Remove this paragraph after adding walkthrough video)
-
-`ADD_EMBEDDED_CODE_HERE`
+<a href="https://www.loom.com/share/58407c23a20c49c28c1650d431b6f810">
+    <img style="max-width:300px;" src="https://cdn.loom.com/sessions/thumbnails/58407c23a20c49c28c1650d431b6f810-with-play.gif">
+  </a>
 
 ### Reflection
 
 - Did the topics discussed in your labs prepare you to complete the assignment? Be specific, which features in your weekly assignment did you feel unprepared to complete?
 
-Add your response here
+The topics in the labs this week really prepared me to complete this assignment. Concepts such as async functions, fetching data from an api using the await keyword, and creating/getting HTML elements using JavaScript were taught in the labs and were needed to create this movie project.
 
 - If you had more time, what would you have done differently? Would you have added additional features? Changed the way your project responded to a particular event, etc.
   
-Add your response here
+I was learning JavaScript on the fly while creating this project so my code might be inconsistent because I learned new ways to do things and what best practices were. So I'd say I would go back and make sure the code is more consistent and organized based on what I know now. As for features, I would've liked to add an account feature where the user can create an account, login, and bookmark their favorite movies. Also a really cool feature could've been to filter movies based on genre and release date so that the user can find movies they may want to watch. Also maybe including what critics had to say about the movies could help as well.
 
 - Reflect on your project demo, what went well? Were there things that maybe didn't go as planned? Did you notice something that your peer did that you would like to try next time?
 
-Add your response here
-
-### Open-source libraries used
-
-- Add any links to open-source libraries used in your project.
+There weren't too many features to cover so creating the demo went well. It took a few tries to get it right because I would forget to show a particular feature or I would take too long showing one. I'm confident that I covered everything that the project has to show.
 
 ### Shout out
 
-Give a shout out to somebody from your cohort that especially helped you during your project. This can be a fellow peer, instructor, TA, mentor, etc.
+- Tim
+- Thomas
+- Roberto (Intern Manager)
+- Diego (Intern Peer)
