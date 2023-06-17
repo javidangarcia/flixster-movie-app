@@ -127,13 +127,16 @@ moviesGrid.addEventListener("click", async (event) => {
         const movieTitle = movieCard.querySelector(".movie-title").textContent;
         const movieVotes = movieCard.querySelector(".movie-votes").textContent;
         const movieID = movieCard.getAttribute("id");
+        console.log(movieID);
 
         const results = await movieInfo(movieID);
-        console.log(results);
         const runtime = results["runtime"];
         const releaseDate = results["release_date"];
         const genre = results["genres"][0]["name"];
         const overview = results["overview"];
+
+        const videoResults = await movieVideo(movieID);
+        const videoKey = videoResults[0]["key"];
 
         const popupWindow = document.createElement("div");
         popupWindow.className = "popup";
@@ -143,6 +146,7 @@ moviesGrid.addEventListener("click", async (event) => {
                 <button class="close-btn" id="close-popup-btn">Close</button>
             </div>
             <div class="popup-content">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/${videoKey}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                 <p class="popup-title">${movieTitle}</p>
                 <p class="popup-info">${runtime} min | ${releaseDate} | ${genre} | <img class="star-image-popup" src="images/star.png"> ${movieVotes}</p>
                 <p class="popup-desc">${overview}</p>
@@ -166,6 +170,22 @@ async function movieInfo(movieID) {
         const url = `https://api.themoviedb.org/3/movie/${movieID}?api_key=${apiKey}`
         const response = await fetch(url);
         const results = await response.json();
+        
+        return results;
+
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+/* Movie Trailer Feature */
+
+async function movieVideo(movieID) {
+    try {
+        const url = `https://api.themoviedb.org/3/movie/${movieID}/videos?api_key=${apiKey}`
+        const response = await fetch(url);
+        const data = await response.json();
+        const results = data["results"];
         
         return results;
 

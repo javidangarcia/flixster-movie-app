@@ -36,6 +36,7 @@ h2 {
 .movies-container {
     display: flex;
     flex-wrap: wrap;
+    cursor: pointer;
 }
 
 .movie-card {
@@ -188,4 +189,9 @@ h2 {
 .star-image-popup {
     height: 20px;
     width: 20px;
+}
+
+iframe {
+    border: 5px solid black;
+    margin: 20px;
 }
